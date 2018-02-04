@@ -14,6 +14,9 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class LoginController extends Controller
 {
 
+    use AuthenticatesUsers;
+    use Helpers;
+    
     private $userRepo; 
 
     public function __construct(UserRepository $userRepo){
@@ -21,6 +24,35 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
-        
+
+        $user = $this->userRepo->findUser($request->all());
+
+        if($user && Hash::check($request["password"], $user->password)){
+            $token = JWTAuth::fromUser($user);
+
+            return $this->sendLoginResponse($request, $token, $user);
+        }
+        return $this->sendFailedLoginResponse($request);
+    }
+
+
+
+    public function sendLoginResponse(Request $request, $token, $user){
+        $this->clearLoginAttempts($request);
+
+        return $this->authenticated($token, $user);
+    }
+
+    public function authenticated($token, $user){
+        return $this->response->array([
+            'token' => $token,
+            'status_code' => 200,
+            'message' => 'success',
+            "currentUser" => $user
+        ]);
+    }    
+
+    public function sendFailedLoginResponse(){
+        throw new UnauthorizedHttpException("Bad Credentials");
     }
 }

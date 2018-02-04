@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CommentSeeder extends Seeder
 {
@@ -14,7 +15,9 @@ class CommentSeeder extends Seeder
         $faker = Faker\Factory::create();
 
 
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         App\Comment::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         for($i=0;$i<20;$i++){
 

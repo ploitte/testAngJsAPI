@@ -13,9 +13,14 @@ class CreateArticleTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
+
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer("id_user");
+
+            $table->integer("id_user")->unsigned();;
+            $table->foreign('id_user')->references('id')->on('users');
+
             $table->string("title");
             $table->longText("content");
             $table->binary('image');

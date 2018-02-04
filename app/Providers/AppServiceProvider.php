@@ -6,6 +6,13 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
 
+use App\Repositories\BaseRepository;
+use App\Repositories\InterfaceRepository;
+use App\Repositories\UserRepository;
+use App\Repositories\ArticleRepository;
+use App\Repositories\CommentRepository;
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -27,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(InterfaceRepository::class,ArticleRepository::class);
         $this->app->singleton(InterfaceRepository::class,CommentRepository::class);
+        $this->app->singleton(InterfaceRepository::class,UserRepository::class);
 
     }
 }

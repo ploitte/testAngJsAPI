@@ -29,9 +29,13 @@ $api->version('v1', function($api){
     ]);
 
 
-    // $api->get("article", [
-    //     "as" => "article",
-    //     "uses" => "App\Http\Controllers\Api\ArticleController@getAllArticle"
-    // ]);
+    $api->group(["middleware" => "api.auth"], function($api){
+
+        $api->get("article", [
+            "as" => "allArticle",
+            "uses" => "App\Http\Controllers\Api\ArticleController@getAllArticle"
+        ]);
+
+    });
 
 });
