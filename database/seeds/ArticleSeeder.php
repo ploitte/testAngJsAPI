@@ -27,7 +27,7 @@ class ArticleSeeder extends Seeder
             $randContent = rand(4,14);
 
             App\Article::create(array(
-                'id_user' => $faker -> numberBetween(1, 10),
+                'user_id' => $faker -> numberBetween(1, 10),
                 'title' => $faker -> sentence($randTilte), 
                 'content' => $faker -> paragraph($randContent),
                 'image' => $faker -> imageUrl(640, 480)

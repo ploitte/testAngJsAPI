@@ -25,8 +25,8 @@ class CommentSeeder extends Seeder
             $randContent = rand(4,10);
 
             App\Comment::create(array(
-                'id_article' => $faker -> numberBetween(1, 20),
-                'id_user' => $faker -> numberBetween(1, 10),
+                'article_id' => $faker -> numberBetween(1, 20),
+                'user_id' => $faker -> numberBetween(1, 10),
                 'title' => $faker -> sentence($randTilte), 
                 'content' => $faker -> paragraph($randContent)
             ));

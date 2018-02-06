@@ -14,5 +14,6 @@ class ArticleRepository extends BaseRepository implements InterfaceRepository
         $this->entity = $article;
     }
 
+    
 
 }

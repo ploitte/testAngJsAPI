@@ -17,11 +17,11 @@ class CreateCommentTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer("id_article")->unsigned();;
-            $table->foreign('id_article')->references('id')->on('articles');
+            $table->integer("article_id")->unsigned();;
+            $table->foreign('article_id')->references('id')->on('articles');
 
-            $table->integer("id_user")->unsigned();
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->integer("user_id")->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->string("title");
             $table->longText("content");
